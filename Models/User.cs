@@ -12,27 +12,27 @@ public class User
   [Required]
   [MinLength(2, ErrorMessage = "First name must be at least 2 characters.")]
   [StringLength(25, ErrorMessage = "First name cannot be more than 25 characters.")]
-  public string FirstName { get; set; }
+  public required string FirstName { get; set; }
 
   [Required]
   [MinLength(2, ErrorMessage = "Last name must be at least 2 characters.")]
   [StringLength(25, ErrorMessage = "Last name cannot be more than 25 characters.")]
-  public string Lastname { get; set; }
+  public required string Lastname { get; set; }
 
   [Required]
   [EmailAddress(ErrorMessage = "Invalid email format.")]
   [MaxLength(50, ErrorMessage = "Last name cannot be more than 50 characters.")]
   [UniqueEmail]
-  public string Email { get; set; }
+  public required string Email { get; set; }
 
   [Required]
   [DataType(DataType.Password)]
   [PasswordCheck]
-  public string Password { get; set; }
+  public required string Password { get; set; }
 
   [NotMapped]
   [Compare("Password", ErrorMessage = "Password and confirmation must match.")]
-  public string PasswordConfirm { get; set; }
+  public required string PasswordConfirm { get; set; }
 
   public List<Task> TasksCreated { get; set; } = new List<Task>();
   public List<Rating> Ratings { get; set; } = new List<Rating>();
@@ -50,8 +50,8 @@ public class UniqueEmailAttribute : ValidationAttribute
     if (value == null)
       return new ValidationResult("Email is required!");
 
-    var context = (MyContext)validationContext.GetService(typeof(MyContext));
-    if (context?.Users.Any(u => u.Email == value.ToString()) == true)
+    var context = validationContext.GetService(typeof(MyContext)) as MyContext;
+    if (context != null && context.Users.Any(u => u.Email == value.ToString()))
       return new ValidationResult("Email must be unique!");
 
     return ValidationResult.Success;
@@ -60,7 +60,7 @@ public class UniqueEmailAttribute : ValidationAttribute
 
 public class PasswordCheckAttribute : ValidationAttribute
 {
-  protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+  protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
   {
     var password = value as string;
 
@@ -79,6 +79,6 @@ public class PasswordCheckAttribute : ValidationAttribute
     if (!Regex.IsMatch(password, @"[\W_]"))
       return new ValidationResult("Password must contain at least one special character.");
 
-    return ValidationResult.Success;
+    return ValidationResult.Success!;
   }
 }
