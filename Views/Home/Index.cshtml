@@ -1,8 +1,87 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
+  ViewData["loggedIn"] = false;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles {
+  <link rel="stylesheet" href="~/css/home.css" />
+}
+
+<div class="content">
+  <img src="~/images/Home-Shapes-1.svg" alt="shape" class="shape1">
+  <div class="container content-wrapper flex column">
+    <h2 class="display-4">5edmaTrack</h2>
+    <div class="flex">
+      <p class="reversed-colors">Effortlessly track your tasks and progress with 5edmaTrack and why not watch some Movies In your free time</p>
+      <p>😉</p>
+    </div>
+    <button class="primary login-btn">- Login -</button>
+    <div class="link-wrapper flex" data-text="New to 5edmaTrack?">
+      <p class="reversed-colors">New to 5edmaTrack ?</p>
+      <a href="#" class="orange sign-up-link">Create an account</a>
+    </div>
+    <div class="shapes">
+      <img src="~/images/Home-Shapes-2.svg" alt="shape" class="shape shape2">
+    </div>
+  </div>
+</div>
+
+<div class="veil hide"></div>
+
+<div class="form-box login-form-box flex hide">
+  <i class="fa-solid fa-xmark"></i>
+  <form action="/login" method="POST" class="flex column">
+    <div class="inputs-boxes-container flex column">
+      <div class="input-box flex">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-box flex">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+      <div class="flex remember-me">
+        <input type="checkbox" id="rememberMe" name="rememberMe">
+        <label for="rememberMe">Remember Me</label>
+      </div>
+    </div>
+    <button type="submit" class="secondary">- Login -</button>
+    <a href="/#" class="orange sign-up-link">Sign Up</a>
+  </form>
+</div>
+
+<div class="register-form-box form-box hide">
+  <i class="fa-solid fa-xmark"></i>
+  <form action="/login" method="POST" class="flex column">
+    <div class="inputs-boxes-container flex">
+      <div class="left flex column">
+        <div class="input-box flex">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Enter your First Name" required>
+        </div>
+        <div class="input-box flex">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Enter your Last Name" required>
+        </div>
+        <div class="input-box flex">
+          <button type="submit" class="secondary">- Sign Up -</button>
+        </div>
+      </div>
+      <div class="right flex column">
+        <div class="input-box flex">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" name="registerEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="input-box flex">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" name="registerPassword" placeholder="Enter your password" required>
+        </div>
+        <div class="input-box flex">
+          <label for="registerConfirmPassword">Confirm Password</label>
+          <input type="password" id="registerConfirmPassword" name="registerConfirmPassword" placeholder="Confirm your password" required>
+        </div>
+      </div>
+    </div>
+    <a href="/#" class="orange log-in-link">Login</a>
+  </form>
 </div>
