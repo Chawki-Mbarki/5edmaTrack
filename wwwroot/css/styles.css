@@ -30,6 +30,8 @@ h2 {
   font-size: 70px;
 }
 
+a {cursor: pointer;}
+
 p, a {
   font-size: 23px;
   font-weight: bold;
@@ -166,6 +168,17 @@ textarea:focus {
   flex-direction: column;
   justify-content: flex-end;
   min-height: 78px;
+}
+
+.errors {
+  list-style-type:none;
+  gap: 15px;
+}
+
+.error {
+  color: red;
+  max-width: 250px;
+
 }
 
 .fa-xmark {
