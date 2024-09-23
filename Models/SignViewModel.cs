@@ -1,8 +1,8 @@
 using khedmatrack.Models;
 
-namespace Belt_Exam.Models;
+namespace khedmatrack.Models;
 
-public class IndexViewModel
+public class SignViewModel
 {
   public User? RegisterModel { get; set; }
   public Login? LoginModel { get; set; }

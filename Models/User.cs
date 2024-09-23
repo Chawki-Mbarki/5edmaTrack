@@ -17,11 +17,11 @@ public class User
   [Required]
   [MinLength(2, ErrorMessage = "Last name must be at least 2 characters.")]
   [StringLength(25, ErrorMessage = "Last name cannot be more than 25 characters.")]
-  public required string Lastname { get; set; }
+  public required string LastName { get; set; }
 
   [Required]
   [EmailAddress(ErrorMessage = "Invalid email format.")]
-  [MaxLength(50, ErrorMessage = "Last name cannot be more than 50 characters.")]
+  [MaxLength(50, ErrorMessage = "Email cannot be more than 50 characters.")]
   [UniqueEmail]
   public required string Email { get; set; }
 
@@ -52,7 +52,7 @@ public class UniqueEmailAttribute : ValidationAttribute
 
     var context = validationContext.GetService(typeof(MyContext)) as MyContext;
     if (context != null && context.Users.Any(u => u.Email == value.ToString()))
-      return new ValidationResult("Email must be unique!");
+      return new ValidationResult("There is already an account with this Email");
 
     return ValidationResult.Success;
   }
