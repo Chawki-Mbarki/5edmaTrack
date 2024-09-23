@@ -17,12 +17,15 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        if (IsAuthenticated())
+        { return RedirectToAction("Services", "User"); }
+        return View(new SignViewModel());
     }
 
-    public IActionResult Privacy()
+    private bool IsAuthenticated()
     {
-        return View();
+        int? userId = HttpContext.Session.GetInt32("UserId");
+        return userId != null;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

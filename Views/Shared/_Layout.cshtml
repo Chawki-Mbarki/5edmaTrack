@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - 5edmaTrack</title>
+    @RenderSection("Styles", required: false)
     <link rel="stylesheet" href="~/css/styles.css">
     <script src="https://kit.fontawesome.com/c6f38472f5.js" crossorigin="anonymous"></script>
 </head>
@@ -14,8 +15,9 @@
         <nav>
             <div class="container flex">
                 <div class="left">
-                    <h1>5edmaTrack</h1>
+                    <h1>5EDMATRACK</h1>
                 </div>
+                @if(ViewData["loggedIn"] is bool loggedIn && loggedIn){
                 <div class="right">
                     <a href="/" class="selected">Home</a> |
                     <a href="/Tasks">Tasks</a> |
@@ -23,19 +25,15 @@
                     <a href="/Account">Account</a>
                     <a href="/Account/Logout" class="danger">Logout</a>
                 </div>
+                }
             </div>
         </nav>
     </header>
-
     <main>
         @RenderBody()
     </main>
 
-    <footer>
-        <p>&copy; 2024 5edmaTrack</p>
-    </footer>
-
-    <script src="~/js/scripts.js"></script>
+    <script src="~/js/script.js"></script>
 </body>
 
 </html>
