@@ -17,15 +17,20 @@
                 <div class="left">
                     <h1>5EDMATRACK</h1>
                 </div>
-                @if(ViewData["loggedIn"] is bool loggedIn && loggedIn){
+
                 <div class="right">
-                    <a href="/" class="selected">Home</a> |
-                    <a href="/Tasks">Tasks</a> |
-                    <a href="/Movies">Movies</a> |
-                    <a href="/Account">Account</a>
-                    <a href="/Account/Logout" class="danger">Logout</a>
+                    @if (ViewData["loggedIn"] is bool loggedIn && loggedIn)
+                    {
+                        @if (ViewData["noLinks"] is bool noLinks && !noLinks)
+                        {
+                            <a href="/" class="selected">Home</a>
+                            <a href="/Tasks">Tasks</a>
+                            <a href="/Movies">Movies</a>
+                            <a href="/Account">Account</a>
+                        }
+                        <a href="/User/Logout" class="danger">Logout</a>
+                    }
                 </div>
-                }
             </div>
         </nav>
     </header>
