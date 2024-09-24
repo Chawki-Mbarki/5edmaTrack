@@ -1,0 +1,22 @@
+main {
+  background: url(../images/Greeting-Background.jpg) no-repeat bottom/cover;
+}
+
+p { color: black; transition: 0.3s; }
+
+.greeting, h2 {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.686);
+  width: fit-content;
+  padding: 0 25px;
+}
+
+h2 {
+  border-radius: 10px 10px 10px 0;
+}
+
+.greeting {
+  color: white;
+  border-radius: 0 0 10px 0;
+  padding-bottom: 10px;
+}
