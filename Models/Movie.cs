@@ -8,7 +8,7 @@ public class Movie
   [Key]
   [Required]
   public int MovieId { get; set; }
-  
+
   [ForeignKey("UserId")]
   public User? Creator { get; set; }
   public int? UserId { get; set; }
