@@ -1,63 +1,63 @@
 @{
-    ViewData["Title"] = "Home Page";
-    ViewData["loggedIn"] = true;
-    ViewData["noLinks"] = true;
-    var registerFailed = ViewData["RegisterFailed"] is bool && (bool)ViewData["RegisterFailed"];
-    var loginFailed = ViewData["LoginFailed"] is bool && (bool)ViewData["LoginFailed"];
+  ViewData["Title"] = "Home Page";
+  ViewData["loggedIn"] = true;
+  ViewData["noLinks"] = true;
+  var registerFailed = ViewData["RegisterFailed"] is bool && (bool)ViewData["RegisterFailed"];
+  var loginFailed = ViewData["LoginFailed"] is bool && (bool)ViewData["LoginFailed"];
 }
 
 @model User;
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/services.css" />
+  <link rel="stylesheet" href="~/css/services.css" />
 }
 
 <div class="content">
-    <div class="container content-wrapper flex column">
-        <div class="flex column" style="margin-top: 25px;">
-            <h2>Greetings @(Model.FirstName)</h2>
-        </div>
-        <p class="greeting">Ready to get some work done ?</p>
-        <div class="cards flex">
-            <a asp-action="Index" asp-controller="Account" class="card flex column">
-                <div class="card-img">
-                    <img src="~/images/Greeting-Icon-1-1-1.png" alt="profile-icon">
-                    <img src="~/images/Greeting-Icon-1-1.png" class="invisible" alt="profile-icon">
-                </div>
-                <h3 class="card-title">Account</h3>
-                <div class="card-icon-container">
-                    <img src="~/images/Greeting-Icon-1-2.png" class="invisible" alt="">
-                </div>
-                <P class="card-description">
-                    Manage Or Delete Your Account
-                </P>
-            </a>
-            <a asp-action="Dashboard" asp-controller="Tasks" class="card flex column">
-                <div class="card-img">
-                    <img src="~/images/Greeting-Icon-2-1-1.png" alt="profile-icon">
-                    <img src="~/images/Greeting-Icon-2-1.png" class="invisible" alt="profile-icon">
-                </div>
-                <h3 class="card-title">Tasks</h3>
-                <div class="card-icon-container">
-                    <img src="~/images/Greeting-Icon-2-2.png" class="invisible" alt="">
-                </div>
-                <P class="card-description">
-                    Create And Do Your Tasks
-                </P>
-            </a>
-            <a asp-action="Dashboard" asp-controller="Movies" class="card flex column">
-                <div class="card-img">
-                    <img src="~/images/Greeting-Icon-3-1-1.png" alt="profile-icon">
-                    <img src="~/images/Greeting-Icon-3-1.png" class="invisible" alt="profile-icon">
-                </div>
-                <h3 class="card-title">Movies</h3>
-                <div class="card-icon-container">
-                    <img src="~/images/Greeting-Icon-3-2.png" class="invisible" alt="">
-                </div>
-                <P class="card-description">
-                    Find Ratings And Reviews For The Newest Movies
-                </P>
-            </a>
-        </div>
+  <div class="container content-wrapper flex column">
+    <div class="flex column" style="margin-top: 25px;">
+      <h2>Greetings @(Model.FirstName)</h2>
     </div>
+    <p class="greeting">Ready to get some work done ?</p>
+    <div class="cards flex">
+      <a asp-action="Index" asp-controller="Account" class="card flex column">
+        <div class="card-img">
+          <img src="~/images/Greeting-Icon-1-1-1.png" alt="profile-icon">
+          <img src="~/images/Greeting-Icon-1-1.png" class="invisible" alt="profile-icon">
+        </div>
+        <h3 class="card-title">Account</h3>
+        <div class="card-icon-container">
+          <img src="~/images/Greeting-Icon-1-2.png" class="invisible" alt="">
+        </div>
+        <P class="card-description">
+          Manage Or Delete Your Account
+        </P>
+      </a>
+      <a asp-action="Dashboard" asp-controller="Tasks" class="card flex column">
+        <div class="card-img">
+          <img src="~/images/Greeting-Icon-2-1-1.png" alt="profile-icon">
+          <img src="~/images/Greeting-Icon-2-1.png" class="invisible" alt="profile-icon">
+        </div>
+        <h3 class="card-title">Tasks</h3>
+        <div class="card-icon-container">
+          <img src="~/images/Greeting-Icon-2-2.png" class="invisible" alt="">
+        </div>
+        <P class="card-description">
+          Create And Do Your Tasks
+        </P>
+      </a>
+      <a asp-action="Dashboard" asp-controller="Movies" class="card flex column">
+        <div class="card-img">
+          <img src="~/images/Greeting-Icon-3-1-1.png" alt="profile-icon">
+          <img src="~/images/Greeting-Icon-3-1.png" class="invisible" alt="profile-icon">
+        </div>
+        <h3 class="card-title">Movies</h3>
+        <div class="card-icon-container">
+          <img src="~/images/Greeting-Icon-3-2.png" class="invisible" alt="">
+        </div>
+        <P class="card-description">
+          Find Ratings And Reviews For The Newest Movies
+        </P>
+      </a>
+    </div>
+  </div>
 </div>
