@@ -112,9 +112,10 @@ input,
 textarea {
   outline: none;
   padding: 10px;
-  width: 100%;
+  width: 250px;
+  max-width: 300px;
   margin-bottom: 15px;
-  border: 1px solid #000;
+  border: 1px solid black;
   border-radius: 5px;
 }
 
@@ -157,16 +158,6 @@ textarea:focus {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-}
-
-.form-box input {
-  width: 250px;
-  max-width: 300px;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
 }
 
 .inputs-boxes-container {

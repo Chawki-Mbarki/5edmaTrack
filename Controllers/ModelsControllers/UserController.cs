@@ -31,7 +31,7 @@ namespace khedmatrack.Controllers
 
       HttpContext.Session.SetInt32("UserId", newUser.UserId);
 
-      return RedirectToAction("Services");
+      return RedirectToAction("Index", "Services");
     }
 
     [HttpPost]
@@ -52,22 +52,7 @@ namespace khedmatrack.Controllers
       }
       HttpContext.Session.SetInt32("UserId", dbUser.UserId);
 
-      return RedirectToAction("Services");
-    }
-
-    public IActionResult Services()
-    {
-      if (!IsAuthenticated())
-      {return RedirectToAction("Index", "Home");}
-
-      int? userId = HttpContext.Session.GetInt32("UserId");
-      
-      User? user = _context.Users.Include(u => u.TasksCreated).Include(u => u.Ratings).FirstOrDefault(u => u.UserId == userId);
-      
-      if (user == null)
-      { return RedirectToAction("Index", "Home"); }
-      
-      return View(user);
+      return RedirectToAction("Index", "Services");
     }
 
     public IActionResult Logout()
