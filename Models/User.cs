@@ -25,7 +25,7 @@ public class User
   [UniqueEmail]
   public required string Email { get; set; }
 
-  [Required]
+  [Required(ErrorMessage = "Password is required!")]
   [DataType(DataType.Password)]
   [PasswordCheck]
   public required string Password { get; set; }
@@ -51,12 +51,27 @@ public class UniqueEmailAttribute : ValidationAttribute
       return new ValidationResult("Email is required!");
 
     var context = validationContext.GetService(typeof(MyContext)) as MyContext;
-    if (context != null && context.Users.Any(u => u.Email == value.ToString()))
-      return new ValidationResult("There is already an account with this Email");
+    var email = value.ToString();
 
+    if (context != null && email != null)
+    {
+      var AccountIdProperty = validationContext.ObjectType.GetProperty("AccountId");
+      var userInstance = validationContext.ObjectInstance;
+      var AccountId = AccountIdProperty?.GetValue(userInstance) as int?;
+      if (AccountId != null)
+      {
+        var existingUser = context.Users.FirstOrDefault(u => u.UserId == AccountId);
+        if (existingUser != null && existingUser.Email == email)
+          return ValidationResult.Success;
+      }
+
+      if (context.Users.Any(u => u.Email == email))
+        return new ValidationResult("There is already an account with this Email.");
+    }
     return ValidationResult.Success;
   }
 }
+
 
 public class PasswordCheckAttribute : ValidationAttribute
 {
@@ -65,7 +80,7 @@ public class PasswordCheckAttribute : ValidationAttribute
     var password = value as string;
 
     if (string.IsNullOrWhiteSpace(password))
-      return new ValidationResult("Password is required!");
+      return ValidationResult.Success;
 
     if (password.Length < 8)
       return new ValidationResult("Password must be at least 8 characters long.");

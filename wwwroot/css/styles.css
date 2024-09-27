@@ -116,12 +116,12 @@ textarea {
   max-width: 300px;
   margin-bottom: 15px;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #9a9c21;
+  border-color: #ff8800;
 }
 
 .content {
@@ -138,7 +138,7 @@ textarea:focus {
 .veil {
   position: absolute;
   top: 73px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.204);
   backdrop-filter: blur(4px);
   z-index: 2;
   width: 100vw;
@@ -152,11 +152,11 @@ textarea:focus {
   top: 50%;
   right: 50%;
   transform: translate(+50%, -50%);
-  backdrop-filter: blur(15px);
+
   padding: 50px;
   border: 2px solid black;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
   transition: 0.3s;
 }
 
