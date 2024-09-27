@@ -61,6 +61,54 @@ namespace khedmatrack.Controllers
       return RedirectToAction("Index", "Home");
     }
 
+    [HttpPost]
+    public IActionResult UpdateAccount(SettingsViewModel model)
+    {
+      if (!IsAuthenticated())
+      {
+        return RedirectToAction("Index", "Home");
+      }
+      int? userId = HttpContext.Session.GetInt32("UserId");
+      User? dbUser = _context.Users.FirstOrDefault(u => u.UserId == userId.Value);
+      if (!ModelState.IsValid || dbUser == null)
+      {
+        ViewData["userFirstName"] = dbUser.FirstName;
+        ViewData["userLastName"] = dbUser.LastName;
+        ModelState.AddModelError(string.Empty, "Invalid registration data.");
+        return View("~/Views/Account/Index.cshtml", model);
+      }
+      dbUser.FirstName = !string.IsNullOrWhiteSpace(model.CurrentAccount.AccountFirstName) ? model.CurrentAccount.AccountFirstName : dbUser.FirstName;
+      dbUser.LastName = !string.IsNullOrWhiteSpace(model.CurrentAccount.AccountLastName) ? model.CurrentAccount.AccountLastName : dbUser.LastName;
+      dbUser.Email = !string.IsNullOrWhiteSpace(model.CurrentAccount.AccountEmail) ? model.CurrentAccount.AccountEmail : dbUser.Email;
+      if (!string.IsNullOrWhiteSpace(model.CurrentAccount.AccountPassword))
+      {
+        dbUser.Password = _passwordHasher.HashPassword(dbUser, model.CurrentAccount.AccountPassword);
+      }
+      dbUser.UpdatedAt = DateTime.Now;
+      _context.Users.Update(dbUser);
+      _context.SaveChanges();
+
+      return RedirectToAction("Index", "Account");
+    }
+
+    [HttpPost("/User/Account/{userId}")]
+    public IActionResult DeleteAccount(int userId)
+    {
+      if (!IsAuthenticated())
+      {
+        return RedirectToAction("Index", "Home");
+      }
+      HttpContext.Session.Clear();
+      User? UserToDelete = _context.Users.SingleOrDefault(u => u.UserId == userId);
+      if (UserToDelete == null)
+      {
+        return RedirectToAction("Index", "Home");
+      }
+      _context.Users.Remove(UserToDelete);
+      _context.SaveChanges();
+      return RedirectToAction("Index", "Home");
+    }
+
     private bool IsAuthenticated()
     {
       int? userId = HttpContext.Session.GetInt32("UserId");

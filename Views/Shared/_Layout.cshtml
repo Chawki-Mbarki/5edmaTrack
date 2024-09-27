@@ -17,16 +17,17 @@
         <div class="left">
           <h1>5EDMATRACK</h1>
         </div>
-
         <div class="right">
           @if (ViewData["loggedIn"] is bool loggedIn && loggedIn)
           {
-            @if (ViewData["noLinks"] is bool noLinks && !noLinks)
+            if (ViewData["noLinks"] is bool noLinks && !noLinks)
             {
-              <a href="/" class="selected">Home</a>
-              <a href="/Tasks">Tasks</a>
-              <a href="/Movies">Movies</a>
-              <a href="/Account">Account</a>
+              int selected = ViewData["selected"] as int? ?? 0;
+
+              <a href="/" class='@(selected == 1 ? "selected" : "")'>Home</a>
+              <a href="/Tasks" class='@(selected == 2 ? "selected" : "")'>Tasks</a>
+              <a href="/Movies" class='@(selected == 3 ? "selected" : "")'>Movies</a>
+              <a href="/Account" class='@(selected == 4 ? "selected" : "")'>Account</a>
             }
             <a href="/User/Logout" class="danger">Logout</a>
           }
@@ -38,7 +39,8 @@
     @RenderBody()
   </main>
 
-  <script src="~/js/script.js"></script>
+  @RenderSection("Scripts", required: false)
 </body>
+
 
 </html>

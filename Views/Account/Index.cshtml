@@ -1,0 +1,96 @@
+@{
+  ViewData["Title"] = "Settings";
+  ViewData["loggedIn"] = true;
+  ViewData["noLinks"] = false;
+  ViewData["selected"] = 4;
+  var transfereFailed = ViewData["transfereFailed"] is bool && (bool)ViewData["transfereFailed"];
+}
+
+@model khedmatrack.Models.SettingsViewModel
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/account.css" />
+}
+
+<div class="content">
+  <div class="container content-wrapper flex column">
+    <div class="info">
+      <div class="full-name flex">
+        <img src="~/images/Greeting-Icon-1-1.png" alt="Greeting Icon">
+        <h2 class="first-name">@ViewData["userFirstName"]</h2>
+        <h2 class="last-name">@ViewData["userLastName"]</h2>
+      </div>
+      <div class="describe flex">
+        <p>Manage your Account </p>
+        <img src="~/images/Greeting-Icon-1-2.png" alt="Greeting Icon">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="veil @(transfereFailed ? "visible" : "hide")"></div>
+
+<div class="settings">
+  <form method="POST" asp-action="UpdateAccount" asp-controller="User" asp-for="CurrentAccount" class="flex column">
+    <input type="hidden" asp-for="CurrentAccount.AccountId" />
+    <div class="inputs-boxes-container flex">
+      <div class="left flex column">
+        <div class="input-box flex">
+          <label asp-for="CurrentAccount.AccountFirstName">First Name</label>
+          <input type="text" asp-for="CurrentAccount.AccountFirstName" placeholder="Enter your First Name">
+          <p class="error"><span asp-validation-for="CurrentAccount.AccountFirstName"></span></p>
+        </div>
+        <div class="input-box flex">
+          <label asp-for="CurrentAccount.AccountLastName">Last Name</label>
+          <input type="text" asp-for="CurrentAccount.AccountLastName" placeholder="Enter your Last Name">
+          <p class="error"><span asp-validation-for="CurrentAccount.AccountLastName"></span></p>
+        </div>
+      </div>
+      <div class="right flex column">
+        <div class="input-box flex">
+          <label asp-for="CurrentAccount.AccountEmail">Email</label>
+          <input type="email" asp-for="CurrentAccount.AccountEmail" placeholder="Enter your email">
+          <p class="error"><span asp-validation-for="CurrentAccount.AccountEmail"></span></p>
+        </div>
+        <div class="input-box flex">
+          <label asp-for="CurrentAccount.AccountPassword">New Password</label>
+          <input type="password" asp-for="CurrentAccount.AccountPassword" placeholder="Enter your password">
+          <p class="error"><span asp-validation-for="CurrentAccount.AccountPassword"></span></p>
+        </div>
+      </div>
+    </div>
+    <span class="error" asp-validation-for="CurrentAccount"></span>
+    <div class="buttons flex">
+      <div class="buttons-wrapper flex">
+        <button type="submit">- Save Changes -</button>
+        <button type="button" class="transfer-btn">- Transfer Data -</button>
+      </div>
+    </div>
+  </form>
+  <div class="buttons flex">
+    <form method="POST" asp-action="DeleteAccount" asp-controller="User"
+      asp-route-userId="@Model.CurrentAccount.AccountId" class="buttons-wrapper flex">
+      <button type="submit">- Delete Account -</button>
+    </form>
+  </div>
+</div>
+
+<div class="form-box transfer-form-box flex @(transfereFailed ? "visible" : "hide")">
+  <i class="fa-solid fa-xmark"></i>
+  <form asp-action="TransferData" asp-controller="User" asp-for="TransferModel" method="POST" class="flex column">
+    <div class="inputs-boxes-container flex column">
+      <div class="input-box flex">
+        <label for="email">Email</label>
+        <input type="email" asp-for="TransferModel.TransferEmail" placeholder="Enter your email" required>
+        <span class="error" asp-validation-for="TransferModel.TransferEmail"></span>
+      </div>
+    </div>
+    <span class="error" asp-validation-for="TransferModel"></span>
+    <button type="submit" class="secondary">- Transfer Data -</button>
+  </form>
+</div>
+
+@section Scripts {
+  <script src="~/js/global.js"></script>
+  <script src="~/js/account.js"></script>
+}

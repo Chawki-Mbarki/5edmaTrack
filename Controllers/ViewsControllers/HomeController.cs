@@ -18,7 +18,7 @@ public class HomeController : Controller
   public IActionResult Index()
   {
     if (IsAuthenticated())
-    { return RedirectToAction("Services", "User"); }
+    { return RedirectToAction("Index", "Services"); }
     return View(new SignViewModel());
   }
 

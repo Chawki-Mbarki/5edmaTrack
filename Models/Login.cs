@@ -18,4 +18,3 @@ public class Login
   [Required]
   public bool RememberMe { get; set; } = false;
 }
-
